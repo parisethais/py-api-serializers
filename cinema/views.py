@@ -33,9 +33,9 @@ class MovieViewSet(ModelViewSet):
     queryset = Movie.objects.all()
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return MovieListSerializer
-        if self.action == 'retrieve':
+        if self.action == "retrieve":
             return MovieDetailSerializer
         return MovieCreateUpdateSerializer
 
@@ -43,10 +43,15 @@ class MovieViewSet(ModelViewSet):
 class MovieSessionViewSet(ModelViewSet):
     queryset = MovieSession.objects.select_related("movie", "cinema_hall")
 
-    def get_serializer_class(self) -> type[
-        MovieSessionListSerializer | MovieSessionSerializer | MovieSessionCreateUpdateSerializer]:
-        if self.action == 'list':
+    def get_serializer_class(
+        self,
+    ) -> type[
+        MovieSessionListSerializer
+        | MovieSessionSerializer
+        | MovieSessionCreateUpdateSerializer
+    ]:
+        if self.action == "list":
             return MovieSessionListSerializer
-        if self.action == 'retrieve':
+        if self.action == "retrieve":
             return MovieSessionSerializer
         return MovieSessionCreateUpdateSerializer

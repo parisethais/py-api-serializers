@@ -12,14 +12,14 @@ class CinemaHall(models.Model):
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -86,10 +86,10 @@ class Ticket(models.Model):
     row = models.IntegerField()
     seat = models.IntegerField()
 
-    def clean(self):
+    def clean(self) -> None:
         for ticket_attr_value, ticket_attr_name, cinema_hall_attr_name in [
-            (self.row, "row", "count_rows"),
-            (self.seat, "seat", "count_seats_in_row"),
+            (self.row, "row", "rows"),
+            (self.seat, "seat", "seats_in_row"),
         ]:
             count_attrs = getattr(
                 self.movie_session.cinema_hall, cinema_hall_attr_name
